@@ -49,7 +49,7 @@
       </div>
     </header>
     <ul class="historic-list">
-      @for (temperature of historicTemperatures; track temperature) {
+      @for (temperature of historicTemperatures | sort: 'desc'; track temperature) {
       <li class="historic-temperature-item" (click)="onReset($index)">
         {{ temperature | temperature: 'cel' }} / {{ temperature | temperature: 'cel' : 'far' }}
       </li>
