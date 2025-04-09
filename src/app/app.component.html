@@ -50,7 +50,9 @@
     </header>
     <ul class="historic-list">
       @for (temperature of historicTemperatures; track temperature) {
-      <li (click)="onReset($index)">{{ temperature | temperature: 'cel' }}</li>
+      <li class="historic-temperature-item" (click)="onReset($index)">
+        {{ temperature | temperature: 'cel' }} / {{ temperature | temperature: 'cel' : 'far' }}
+      </li>
       }
     </ul>
   </article>
@@ -131,15 +133,32 @@
     padding: 0;
   }
 
-  .historic-list li {
-    padding: 8px;
+  .historic-temperature-item {
+    padding: 12px 20px;
     background-color: #f4f4f4;
-    margin: 5px 0;
-    border-radius: 4px;
+    margin: 8px 0;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s ease, transform 0.3s ease;
   }
 
-  .historic-list li:hover {
+  .historic-temperature-item:hover {
     background-color: #ddd;
+    transform: scale(1.02);
+  }
+
+  .historic-temperature-item:active {
+    background-color: #ccc;
+  }
+
+  .historic-temperature-item:first-child {
+    margin-top: 0;
+  }
+
+  .historic-temperature-item:last-child {
+    margin-bottom: 0;
   }
 </style>
