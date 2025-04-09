@@ -7,10 +7,37 @@
         <p>{{ currentDate | date:'medium' }}</p>
       </div>
     </header>
-    <p>New York: {{ currentTemperaturs.newYork | number: '1.1-2' }}</p>
-    <p>Berlin: {{ currentTemperaturs.berlin | number: '1.1-2' }}</p>
-    <p>Paris: {{ currentTemperaturs.paris | number: '1.1-2' }}</p>
-    <p>Chicago: {{ currentTemperaturs.chicago | number: '1.1-2' }}</p>
+    <table class="temperature-table">
+      <thead>
+        <tr>
+          <th>City</th>
+          <th>Celsius (°C)</th>
+          <th>Fahrenheit (°F)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>New York</td>
+          <td>{{ currentTemperaturs.newYork | temperature: 'cel' }}</td>
+          <td>{{ currentTemperaturs.newYork | temperature: 'cel' : 'far' }}</td>
+        </tr>
+        <tr>
+          <td>Berlin</td>
+          <td>{{ currentTemperaturs.berlin | temperature: 'cel' }}</td>
+          <td>{{ currentTemperaturs.berlin | temperature: 'cel' : 'far' }}</td>
+        </tr>
+        <tr>
+          <td>Paris</td>
+          <td>{{ currentTemperaturs.paris | temperature: 'cel' }}</td>
+          <td>{{ currentTemperaturs.paris | temperature: 'cel' : 'far' }}</td>
+        </tr>
+        <tr>
+          <td>Chicago</td>
+          <td>{{ currentTemperaturs.chicago | temperature: 'cel' }}</td>
+          <td>{{ currentTemperaturs.chicago | temperature: 'cel' : 'far' }}</td>
+        </tr>
+      </tbody>
+    </table>
   </article>
 
   <article class="temperatures">
@@ -21,10 +48,98 @@
         <p>Berlin</p>
       </div>
     </header>
-    <ul>
+    <ul class="historic-list">
       @for (temperature of historicTemperatures; track temperature) {
-      <li (click)="onReset($index)">{{ temperature }}</li>
+      <li (click)="onReset($index)">{{ temperature | temperature: 'cel' }}</li>
       }
     </ul>
   </article>
 </main>
+
+<!-- Add this CSS for the styling -->
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+
+  .temperatures {
+    background-color: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  header img {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+  }
+
+  header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+  }
+
+  header p {
+    font-size: 14px;
+    color: #777;
+  }
+
+  table.temperature-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  table.temperature-table th,
+  table.temperature-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+
+  table.temperature-table th {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  table.temperature-table td {
+    background-color: #f9f9f9;
+  }
+
+  table.temperature-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  table.temperature-table tr:hover {
+    background-color: #ddd;
+  }
+
+  .historic-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .historic-list li {
+    padding: 8px;
+    background-color: #f4f4f4;
+    margin: 5px 0;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .historic-list li:hover {
+    background-color: #ddd;
+  }
+</style>
