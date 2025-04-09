@@ -23,8 +23,6 @@ export class AppComponent {
   ];
 
   onReset(index: number) {
-    const tempHistoricTemperatures = [...this.historicTemperatures];
-    tempHistoricTemperatures[index] = 18;
-    this.historicTemperatures = tempHistoricTemperatures;
+    this.historicTemperatures[index] = 18;
   }
 }
